@@ -2,13 +2,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import plotly.express as px
 
-def plot_songs_in_most_regions(selected_regions, df):
+def plot_songs_in_most_regions(df):
     # Count the number of unique regions where each song is popular
     song_region_counts = (
-        df.groupby(['track_name', 'artist_name'])
+        df.groupby(['track_name', 'artist_name', 'popularity','features'])
         .agg({'region': 'nunique'})
         .reset_index()
-        .query(f'region=={selected_regions}')
         .sort_values(by='popularity', ascending=False)
         .head(10)
     )
@@ -20,10 +19,10 @@ def plot_songs_in_most_regions(selected_regions, df):
         orientation='h',
         title="Songs Popular in the Most Regions",
         labels={'region': 'Number of Regions', 'track_name': 'Song Name'},
-        hover_data=['artist_name']
+        hover_data=['artist_name', 'features']
     )
     fig2.update_layout(
-        yaxis=dict(autorange="reversed"),
+        yaxis={'categoryorder':'total ascending'},
         height=600,
         width=800
     )

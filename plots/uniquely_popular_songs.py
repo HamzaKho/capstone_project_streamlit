@@ -13,7 +13,7 @@ def plot_uniquely_popular_songs(selected_unique_region, df):
         y='track_name',
         color='artist_name',
         orientation='h',
-        title="Songs Popular in Only the Selected Region",
+        title=f"Songs Popular Only in {selected_unique_region}",
         labels={'popularity': 'Popularity', 'track_name': 'Song Name'},
         hover_data=['artist_name']        
     )
